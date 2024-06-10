@@ -60,7 +60,7 @@ const MyOrdersPage = () => {
         <div className={styles.wrapper}>
           <div className={styles.string}>
             <h2 className={styles.subtitle}>Мои заявки</h2>
-            {orders && orders.length && (
+            {orders && orders.length > 0 && (
               <Button
                 variant="solid"
                 color="primary"
@@ -72,20 +72,21 @@ const MyOrdersPage = () => {
             )}
           </div>
           <div className={styles.orders}>
-            {!orders && (
-              <Empty title="Ваших заявок пока нет">
-                <Button
-                  variant="solid"
-                  color="primary"
-                  href="/new-order"
-                  component={Link}
-                >
-                  Оставить заявку
-                </Button>
-              </Empty>
-            )}
+            {!orders ||
+              (orders.length === 0 && (
+                <Empty title="Ваших заявок пока нет">
+                  <Button
+                    variant="solid"
+                    color="primary"
+                    href="/new-order"
+                    component={Link}
+                  >
+                    Оставить заявку
+                  </Button>
+                </Empty>
+              ))}
             {orders &&
-              orders.length &&
+              orders.length > 0 &&
               orders.map((order, index) => (
                 <Card variant="outlined" key={index}>
                   <div className={styles.cardWrapper}>

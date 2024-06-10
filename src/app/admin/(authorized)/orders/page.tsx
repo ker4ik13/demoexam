@@ -60,9 +60,10 @@ const OrdersPage = () => {
         <div className={styles.wrapper}>
           <h2 className={styles.subtitle}>Все заявки</h2>
           <div className={styles.orders}>
-            {!orders && <Empty title="Заявок пока нет"></Empty>}
+            {!orders ||
+              (orders.length === 0 && <Empty title="Заявок пока нет"></Empty>)}
             {orders &&
-              orders.length &&
+              orders.length > 0 &&
               orders.map((order, index) => (
                 <Card variant="outlined" key={index}>
                   <div className={styles.cardWrapper}>
