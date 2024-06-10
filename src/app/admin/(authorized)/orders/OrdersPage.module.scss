@@ -1,0 +1,41 @@
+@import "@/shared/styles/_vars";
+
+.container {
+  @include container();
+  padding-top: rem(30);
+
+  @media screen and (max-width: $max-768) {
+    padding-top: rem(30);
+  }
+}
+
+.orders {
+  display: flex;
+  width: 100%;
+  gap: rem(10);
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  margin-top: rem(30);
+  padding-bottom: rem(30);
+}
+.string {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cardWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: rem(8);
+}
+.orderCar {
+  font-size: rem(20);
+}
+.orderUser {
+  font-size: rem(18);
+  & span {
+    font-size: rem(16);
+  }
+}

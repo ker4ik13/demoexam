@@ -70,13 +70,13 @@ $white: #ffffff;
 }
 
 @mixin container() {
-  max-width: rem(1100);
+  max-width: rem(1400);
   padding: 0 20px;
   width: 100%;
   margin: 0 auto;
 
   @media (max-width: $max-768) {
-    padding: 0 15px;
+    padding: 0 14px;
   }
 }
 

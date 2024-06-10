@@ -72,14 +72,10 @@ const AdminLoginPage = () => {
         <br />
         <ButtonGroup color="primary">
           <Button variant="solid" href={appLinks.admin.dashboard} component="a">
-            Дашборд
+            Админ панель
           </Button>
-          <Button
-            variant="solid"
-            href={appLinks.admin.articles.main}
-            component="a"
-          >
-            Статьи
+          <Button variant="solid" href={"/"} component="a">
+            Главная
           </Button>
         </ButtonGroup>
       </div>

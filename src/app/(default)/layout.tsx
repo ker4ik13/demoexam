@@ -3,6 +3,7 @@
 import "@/app/styles";
 import s from "@/pages/GeneralPage.module.scss";
 import { useAuth } from "@/shared/helpers/auth";
+import { Header } from "@/widgets/Header/Header";
 import { CircularProgress, Stack } from "@mui/joy";
 import { useEffect } from "react";
 
@@ -40,7 +41,10 @@ export default function RootLayout({
       )}
 
       {isAuth && !isLoading && user && (
-        <main className={s.main}>{children}</main>
+        <>
+          <Header />
+          <main className={s.main}>{children}</main>
+        </>
       )}
     </body>
   );

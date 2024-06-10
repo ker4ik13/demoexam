@@ -30,7 +30,6 @@ export const useProvideAuth = (): AuthContextType => {
 
   const signout = () => {
     const newUser = AuthService.logout(user);
-    setIsAuth(newUser?.isAuth || false);
     return handleUser(newUser);
   };
 

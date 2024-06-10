@@ -1,7 +1,7 @@
-import DashboardPage from "@/pages/DashboardPage/DashboardPage";
+import OrdersPage from "../orders/page";
 
 const page = () => {
-  return <DashboardPage />;
+  return <OrdersPage />;
 };
 
 export default page;

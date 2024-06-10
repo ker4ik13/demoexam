@@ -1,0 +1,26 @@
+@import "@/shared/styles/_vars";
+
+.container {
+  @include container();
+  padding-top: rem(30);
+}
+
+.inputs {
+  max-width: rem(500);
+  width: 100%;
+  margin-top: rem(30);
+  margin-bottom: rem(30);
+  gap: rem(30);
+  justify-content: flex-start;
+}
+
+.string {
+  width: 100%;
+  gap: rem(10);
+  display: flex;
+  align-items: flex-start;
+
+  @media screen and (max-width: $max-600) {
+    flex-direction: column;
+  }
+}

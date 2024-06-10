@@ -1,59 +1,14 @@
 "use client";
 
-import { UserProductService } from "@/services";
+import helloImg from "@/data/user/images/5.jpg";
 import { useAuth } from "@/shared/helpers/auth";
-import type { IError } from "@/shared/types";
-import { type Product } from "@/shared/types/product";
-import { ToggleThemeButton } from "@/shared/ui";
-import { ShoppingCart } from "@mui/icons-material";
-import {
-  Badge,
-  Button,
-  ButtonGroup,
-  Divider,
-  IconButton,
-  LinearProgress,
-  Stack,
-  Typography,
-} from "@mui/joy";
-import { type AxiosError } from "axios";
+import { Button, ButtonGroup, Divider, Stack, Typography } from "@mui/joy";
+import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import styles from "./MainPage.module.scss";
 
-const ProductsPage = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState<IError>({
-    isError: false,
-    text: "",
-  });
-
-  const { user, isAuth, signout } = useAuth();
-
-  const getProducts = async () => {
-    setIsLoading(true);
-    try {
-      const response = await UserProductService.getAll();
-      setProducts(response.data);
-      setIsError({
-        isError: false,
-        text: "",
-      });
-    } catch (error) {
-      const axiosError = error as AxiosError;
-      setIsError({
-        isError: true,
-        text: "Произошла ошибка при получении данных!",
-        status: axiosError.response?.status,
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getProducts();
-  }, []);
+const MainPage = () => {
+  const { user, isAuth } = useAuth();
 
   if (!user && !isAuth) {
     return (
@@ -78,75 +33,43 @@ const ProductsPage = () => {
   }
 
   return (
-    <Stack minHeight="100vh" padding={4} position="relative">
-      <title>Товары</title>
-      {isLoading && (
-        <LinearProgress
-          variant="solid"
-          sx={{
-            position: "absolute",
-            top: 10,
-            left: "50%",
-            zIndex: 5,
-            width: 300,
-            transform: "translateX(-50%)",
-          }}
+    <Stack minHeight="100vh" position="relative">
+      <title>Сервис</title>
+      <div className={styles.helloScreen}>
+        <Image
+          src={helloImg}
+          alt="Hello image"
+          className={styles.helloImg}
+          width={1920}
+          height={1080}
         />
-      )}
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        gap={4}
-      >
-        <Typography level="h2" textAlign="center">
-          Товары
-        </Typography>
-        <ButtonGroup variant="solid">
-          <Badge
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
-            badgeContent={0}
-            color="danger"
-          >
-            <IconButton
-              component={Link}
-              variant="solid"
-              color="primary"
-              href={"/cart"}
-            >
-              <ShoppingCart />
-            </IconButton>
-          </Badge>
-          <Button
-            color="primary"
-            onClick={getProducts}
-            loading={isLoading}
-            loadingPosition="start"
-          >
-            Обновить
-          </Button>
-          {user && user.isAdmin && (
+        <h1 className={styles.title}>Сервис</h1>
+      </div>
+      <div className={styles.container}>
+        <div className={styles.wrapper}>
+          <h2 className={styles.subtitle}>Услуги</h2>
+          <div className={styles.offers}>
+            <p className={styles.offer}>Ремонт и тех. обслуживание</p>
+            <p className={styles.offer}>
+              Продажа автозапчастей и расходников для ТО
+            </p>
+            <p className={styles.offer}>Шиномонтаж</p>
+          </div>
+          <div className={styles.buttonWrapper}>
             <Button
+              href="/new-order"
               color="primary"
               component={Link}
               variant="solid"
-              href={"/admin/dashboard"}
+              className={styles.button}
             >
-              Админ панель
+              Оставить заявку
             </Button>
-          )}
-          <Button color="primary" onClick={signout}>
-            Выйти
-          </Button>
-
-          <ToggleThemeButton variant="solid" color="warning" />
-        </ButtonGroup>
-      </Stack>
+          </div>
+        </div>
+      </div>
     </Stack>
   );
 };
 
-export default ProductsPage;
+export default MainPage;

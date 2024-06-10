@@ -12,9 +12,12 @@ import { useAuth } from "@/shared/helpers/auth";
 import { useOnClickOutside } from "@/shared/helpers/hooks";
 import { IsActivePage } from "@/shared/types/ui";
 import { ToggleThemeButton } from "@/shared/ui";
+import { ShoppingCart } from "@mui/icons-material";
 import {
+  Badge,
   Box,
   Button,
+  ButtonGroup,
   Card,
   Dropdown,
   IconButton,
@@ -69,12 +72,45 @@ export const Header = () => {
   return (
     <header className={s.header} data-tag="header">
       <div className={s.wrapper}>
-        <Link href={appLinks.admin.dashboard} className={s.panel}>
-          Панель
-        </Link>
-        {/* <Link href="/" className={s.logoWrapper}>
-          <Logo />
-        </Link> */}
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          gap={4}
+        >
+          <ButtonGroup variant="solid">
+            <Badge
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              badgeContent={0}
+              color="danger"
+            >
+              <IconButton
+                component={Link}
+                variant="solid"
+                color="primary"
+                href={"/orders"}
+              >
+                <ShoppingCart />
+              </IconButton>
+            </Badge>
+            {user && user.isAdmin && (
+              <Button
+                color="primary"
+                component={Link}
+                variant="solid"
+                href={"/admin/dashboard"}
+              >
+                Админ панель
+              </Button>
+            )}
+            {/* <Button color="primary" onClick={signout}>
+              Выйти
+            </Button> */}
+          </ButtonGroup>
+        </Stack>
       </div>
       <Sidebar
         isOpenSidebar={isOpenSidebar}

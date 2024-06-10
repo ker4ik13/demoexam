@@ -33,7 +33,7 @@ export const pages: GroupPages[] = [
       },
       {
         name: "Все заявки",
-        link: "/admin/orders",
+        link: "/admin/dashboard",
         icon: <FaRegUser />,
         isAdminPage: true,
       },
